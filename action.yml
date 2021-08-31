@@ -22,7 +22,8 @@ inputs:
 
 runs:
   using: 'composite'
-  runs: fetch-release.ps1
+  steps:
+  - run: fetch-release.ps1
 
 outputs:
   version:
