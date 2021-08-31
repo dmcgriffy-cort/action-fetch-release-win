@@ -23,7 +23,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  - run: fetch-release.ps1
+  - run: .\fetch-release.ps1
     shell: pwsh
 
 outputs:
