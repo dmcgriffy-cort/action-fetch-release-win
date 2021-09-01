@@ -36,7 +36,7 @@ echo "Version: $Env:INPUT_VERSION"
 
 $API_URL="https://api.github.com/repos/$REPO"
 if ($TOKEN -ne $null) {
-    $HEADER="-H ""Authorization: token $TOKEN"""
+    $HEADER="-H """"Authorization: token $TOKEN"""""
 }
 echo "Header: $HEADER"
 $RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
