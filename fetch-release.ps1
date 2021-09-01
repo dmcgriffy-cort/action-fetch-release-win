@@ -10,19 +10,19 @@ if ($Env:GITHUB_REPOSITORY -eq $null) {
 }
 
 $REPO=$Env:GITHUB_REPOSITORY
-if ($Env:INPUT_REPO -ne $null) {
+if ($Env:INPUT_REPO -ne $null -and $env:INPUT_REPO -ne "") {
   $REPO=$INPUT_REPO
 }
 
 # Optional target file path
 $TARGET=$Env:INPUT_FILE
-if ($Env:INPUT_TARGET -ne $null) {
+if ($Env:INPUT_TARGET -ne $null -and $env:INPUT_TARGET -ne "") {
   $TARGET=$Env:INPUT_TARGET
 }
 
 # Optional personal access token for external repository
 $TOKEN=$Env:GITHUB_TOKEN
-if ($Env:INPUT_TOKEN -ne $null) {
+if ($Env:INPUT_TOKEN -ne $null -and $env:INPUT_TOKEN -ne "") {
   $TOKEN=$INPUT_TOKEN
 }
 
