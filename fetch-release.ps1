@@ -4,6 +4,6 @@ if ($INPUT_FILE -eq $null) {
     exit 1
 } endif
 
-echo "Input file: " ${{ inputs.file }}
+echo "Input file: " $INPUT_FILE
 
 exit 0
