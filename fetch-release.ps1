@@ -1,9 +1,9 @@
 
-if $INPUT_FILE -eq $null
-	echo  "Missing file input in the action"
+if ($Env:INPUT_FILE -eq $null) {
+    echo  "Missing file input in the action"
     exit 1
-endif
+}
 
-echo "Input file: " $INPUT_FILE
+echo "Input file: " $Env:INPUT_FILE
 
 exit 0

@@ -22,7 +22,11 @@ inputs:
 
 runs:
   using: 'composite'
-  runs: fetch-release.ps1
+  steps:
+  - run: ${{ github.action_path }}/fetch-release.ps1
+    shell: pwsh
+    env:
+      INPUT_FILE: ${{ inputs.file }}
 
 outputs:
   version:
