@@ -31,9 +31,10 @@ echo "Token: $TOKEN"
 echo "GitHub Token: $Env:GITHUB_TOKEN"
 
 $API_URL="https://api.github.com/repos/$REPO"
-echo "-H ""Authorization: token $TOKEN"""
-$RELEASE_DATA=$(curl ($TOKEN -ne $null) ? "-H ""Authorization: token $TOKEN""" : "" `
-                    "$API_URL/releases/$Env:INPUT_VERSION")
+if ($TOKEN -ne $null) {
+    $HEADER="-H ""Authorization: token $TOKEN"""
+}
+$RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
 echo $RELEASE_DATA
 $MESSAGE=$(echo "$RELEASE_DATA" | jq -r ".message")
 
