@@ -41,7 +41,8 @@ if ($TOKEN -ne $null) {
 }
 echo "API URL: $API_URL"
 echo "Header: $HEADER"
-$RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
+#$RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
+$RELEASE_DATA=$(curl -H "Authorization: token xyz" "$API_URL/releases")
 echo $RELEASE_DATA
 $MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".message")
 
