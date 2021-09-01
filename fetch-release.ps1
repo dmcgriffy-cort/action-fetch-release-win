@@ -37,7 +37,7 @@ echo "Version: $Env:INPUT_VERSION"
 $API_URL="https://api.github.com/repos/$REPO"
 if ($TOKEN -ne $null) {
 #    $HEADER="-H """"Authorization: token $TOKEN"""""
-    $HEADER="-H """"Authorization: token xyz"""""
+    $HEADER="-H 'Authorization: token xyz'"
 }
 echo "API URL: $API_URL"
 echo "Header: $HEADER"
