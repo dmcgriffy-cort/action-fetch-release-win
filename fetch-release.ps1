@@ -9,29 +9,29 @@ if ($Env:GITHUB_REPOSITORY -eq $null) {
   exit 1
 }
 
-REPO=$Env:GITHUB_REPOSITORY
+$REPO=$Env:GITHUB_REPOSITORY
 if ($Env:INPUT_REPO -ne $null) {
-  REPO=$INPUT_REPO
+  $REPO=$INPUT_REPO
 }
 
 # Optional target file path
-TARGET=$Env:INPUT_FILE
+$TARGET=$Env:INPUT_FILE
 if ($Env:INPUT_TARGET -ne $null) {
-  TARGET=$Env:INPUT_TARGET
+  $TARGET=$Env:INPUT_TARGET
 }
 
 # Optional personal access token for external repository
-TOKEN=$Env:GITHUB_TOKEN
+$TOKEN=$Env:GITHUB_TOKEN
 if ($Env:INPUT_TOKEN -ne $null) {
-  TOKEN=$INPUT_TOKEN
+  $TOKEN=$INPUT_TOKEN
 }
 
 echo "Input file: $Env:INPUT_FILE"
 
-API_URL="https://api.github.com/repos/$REPO"
-RELEASE_DATA=$(curl $TOKEN -ne $null ? "-H ""Authorization: token $TOKEN""" \
+$API_URL="https://api.github.com/repos/$REPO"
+$RELEASE_DATA=$(curl $TOKEN -ne $null ? "-H ""Authorization: token $TOKEN""" \
                     "$API_URL/releases/$Env:INPUT_VERSION")
-MESSAGE=$(echo "$RELEASE_DATA" | jq -r ".message")
+$MESSAGE=$(echo "$RELEASE_DATA" | jq -r ".message")
 
 echo "Message $MESSAGE"
 
