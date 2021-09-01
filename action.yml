@@ -23,7 +23,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  - run: ./fetch-release.ps1
+  - run: '& $env:GITHUB_ACTION_PATH/fetch-release.ps1'
     shell: pwsh
 
 outputs:
