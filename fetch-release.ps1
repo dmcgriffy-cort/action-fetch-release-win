@@ -28,6 +28,7 @@ if ($Env:INPUT_TOKEN -ne $null -and $env:INPUT_TOKEN -ne "") {
 
 echo "Input file: $Env:INPUT_FILE"
 echo "GitHub Token: $Env:GITHUB_TOKEN"
+echo "Input Token: $INPUT_TOKEN"
 echo "Token: $TOKEN"
 echo "GitHub repo: $Env:GITHUB_REPOSITORY"
 echo "Repo: $REPO"
