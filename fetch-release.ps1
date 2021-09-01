@@ -10,8 +10,8 @@ if ($Env:GITHUB_REPOSITORY -eq $null) {
 }
 
 $REPO=$Env:GITHUB_REPOSITORY
-if ($Env:INPUT_REPO -ne $null -and $env:INPUT_REPO -ne "") {
-  $REPO=$INPUT_REPO
+if ($Env:INPUT_REPO -ne $null -and $Env:INPUT_REPO -ne "") {
+  $REPO=$Env:INPUT_REPO
 }
 
 # Optional target file path
