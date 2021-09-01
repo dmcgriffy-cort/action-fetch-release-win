@@ -16,7 +16,7 @@ if ($Env:INPUT_REPO -ne $null -and $env:INPUT_REPO -ne "") {
 
 # Optional target file path
 $TARGET=$Env:INPUT_FILE
-if ($Env:INPUT_TARGET -ne $null -and $env:INPUT_TARGET -ne "") {
+if ($Env:INPUT_TARGET -ne $null -and $Env:INPUT_TARGET -ne "") {
   $TARGET=$Env:INPUT_TARGET
 }
 
@@ -28,7 +28,7 @@ if ($Env:INPUT_TOKEN -ne $null -and $env:INPUT_TOKEN -ne "") {
 
 echo "Input file: $Env:INPUT_FILE"
 echo "GitHub Token: $Env:GITHUB_TOKEN"
-echo "Input Token: $INPUT_TOKEN"
+echo "Input Token: $Env:INPUT_TOKEN"
 echo "Token: $TOKEN"
 echo "GitHub repo: $Env:GITHUB_REPOSITORY"
 echo "Repo: $REPO"
