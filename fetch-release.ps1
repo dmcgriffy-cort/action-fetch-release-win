@@ -31,6 +31,7 @@ echo "Token: $TOKEN"
 echo "Repo: $REPO"
 echo "Version: $Env:INPUT_VERSION"
 echo "GitHub Token: $Env:GITHUB_TOKEN"
+echo "GitHub Action Path: $Env:GITHUB_ACTION_PATH"
 
 $API_URL="https://api.github.com/repos/$REPO"
 if ($TOKEN -ne $null) {
