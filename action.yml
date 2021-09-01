@@ -25,6 +25,8 @@ runs:
   steps:
   - run: ${{ github.action_path }}/fetch-release.ps1
     shell: pwsh
+    env:
+      FILE: ${{ inputs.file }}
 
 outputs:
   version:
