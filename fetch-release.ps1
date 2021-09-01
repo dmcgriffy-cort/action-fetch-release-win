@@ -1,8 +1,8 @@
 
-if ($INPUT_FILE -eq $null)
-	echo  "Missing file input in the action"
+if ($INPUT_FILE -eq $null) {
+    echo  "Missing file input in the action"
     exit 1
-endif
+} endif
 
 echo "Input file: " $INPUT_FILE
 
