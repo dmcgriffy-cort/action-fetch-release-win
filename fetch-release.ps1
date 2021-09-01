@@ -1,9 +1,9 @@
 
-if ($INPUT_FILE -eq $null) {
+if (${{ inputs.file }} -eq $null) {
     echo  "Missing file input in the action"
     exit 1
 } endif
 
-echo "Input file: " $INPUT_FILE
+echo "Input file: " ${{ inputs.file }}
 
 exit 0
