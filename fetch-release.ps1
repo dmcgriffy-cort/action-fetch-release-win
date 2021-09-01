@@ -27,10 +27,12 @@ if ($Env:INPUT_TOKEN -ne $null) {
 }
 
 echo "Input file: $Env:INPUT_FILE"
+echo "Token: $TOKEN"
+echo "GitHub Token: $Env:GITHUB_TOKEN"
 
 $API_URL="https://api.github.com/repos/$REPO"
 echo "-H ""Authorization: token $TOKEN"""
-$RELEASE_DATA=$(curl $TOKEN -ne $null ? "-H ""Authorization: token $TOKEN""" `
+$RELEASE_DATA=$(curl $TOKEN -ne $null ? "-H ""Authorization: token $TOKEN""" : "" `
                     "$API_URL/releases/$Env:INPUT_VERSION")
 $MESSAGE=$(echo "$RELEASE_DATA" | jq -r ".message")
 
