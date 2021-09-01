@@ -31,7 +31,7 @@ echo "Token: $TOKEN"
 echo "Repo: $REPO"
 echo "Version: $Env:INPUT_VERSION"
 echo "GitHub Token: $Env:GITHUB_TOKEN"
-echo "GitHub Action Path: $Env:GITHUB_ACTION_PATH"
+echo "jq exe: " "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe"
 
 $API_URL="https://api.github.com/repos/$REPO"
 if ($TOKEN -ne $null) {
@@ -39,7 +39,7 @@ if ($TOKEN -ne $null) {
 }
 $RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
 echo $RELEASE_DATA
-$MESSAGE=$(echo "$RELEASE_DATA" | "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".message")
+# $MESSAGE=$(echo "$RELEASE_DATA" | "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".message")
 
 echo "Message $MESSAGE"
 
