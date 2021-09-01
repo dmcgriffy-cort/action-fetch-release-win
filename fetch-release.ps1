@@ -22,8 +22,8 @@ if ($Env:INPUT_TARGET -ne $null -and $Env:INPUT_TARGET -ne "") {
 
 # Optional personal access token for external repository
 $TOKEN=$Env:GITHUB_TOKEN
-if ($Env:INPUT_TOKEN -ne $null -and $env:INPUT_TOKEN -ne "") {
-  $TOKEN=$INPUT_TOKEN
+if ($Env:INPUT_TOKEN -ne $null -and $Env:INPUT_TOKEN -ne "") {
+  $TOKEN=$Env:INPUT_TOKEN
 }
 
 echo "Input file: $Env:INPUT_FILE"
