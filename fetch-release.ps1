@@ -28,6 +28,8 @@ if ($Env:INPUT_TOKEN -ne $null) {
 
 echo "Input file: $Env:INPUT_FILE"
 echo "Token: $TOKEN"
+echo "Repo: $REPO"
+echo "Version: $Env:INPUT_VERSION"
 echo "GitHub Token: $Env:GITHUB_TOKEN"
 
 $API_URL="https://api.github.com/repos/$REPO"
@@ -36,7 +38,7 @@ if ($TOKEN -ne $null) {
 }
 $RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
 echo $RELEASE_DATA
-$MESSAGE=$(echo "$RELEASE_DATA" | jq -r ".message")
+$MESSAGE=$(echo "$RELEASE_DATA" | $Env:$GITHUB_ACTION_PATH\jq -r ".message")
 
 echo "Message $MESSAGE"
 
