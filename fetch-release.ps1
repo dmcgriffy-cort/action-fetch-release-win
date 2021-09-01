@@ -40,7 +40,7 @@ if ($TOKEN -ne $null) {
 $RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
 echo $RELEASE_DATA
 # $MESSAGE=$(echo "$RELEASE_DATA" | "$Env:GITHUB_ACTION_PATH\\bin\\jq-win64.exe" -r ".message")
-$MESSAGE=$(echo "$RELEASE_DATA" | "$Env:GITHUB_ACTION_PATH\\bin\\jq-win64.exe")
+$MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe")
 
 echo "Message $MESSAGE"
 
