@@ -26,7 +26,11 @@ runs:
   - run: ${{ github.action_path }}/fetch-release.ps1
     shell: pwsh
     env:
+      INPUT_REPO: ${{ inputs.target }}
+      INPUT_VERSION: ${{ inputs.version }}
       INPUT_FILE: ${{ inputs.file }}
+      INPUT_TARGET: ${{ inputs.target }}
+      INPUT_TOKEN: ${{ inputs.token }}
 
 outputs:
   version:
