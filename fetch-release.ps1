@@ -27,11 +27,11 @@ if ($Env:INPUT_TOKEN -ne $null -and $env:INPUT_TOKEN -ne "") {
 }
 
 echo "Input file: $Env:INPUT_FILE"
+echo "GitHub Token: $Env:GITHUB_TOKEN"
 echo "Token: $TOKEN"
 echo "GitHub repo: $Env:GITHUB_REPOSITORY"
 echo "Repo: $REPO"
 echo "Version: $Env:INPUT_VERSION"
-echo "GitHub Token: $Env:GITHUB_TOKEN"
 
 $API_URL="https://api.github.com/repos/$REPO"
 if ($TOKEN -ne $null) {

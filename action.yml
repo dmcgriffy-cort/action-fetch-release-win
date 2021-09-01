@@ -31,6 +31,7 @@ runs:
       INPUT_FILE: ${{ inputs.file }}
       INPUT_TARGET: ${{ inputs.target }}
       INPUT_TOKEN: ${{ inputs.token }}
+      GITHUB_TEOKEN: ${{ secrets.GIHUB_TOKEN }}
 
 outputs:
   version:
