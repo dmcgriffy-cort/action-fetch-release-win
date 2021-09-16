@@ -35,18 +35,19 @@ echo "Repo: $REPO"
 echo "Version: $Env:INPUT_VERSION"
 
 $API_URL="https://api.github.com/repos/$REPO"
-if ($TOKEN -ne $null) {
-    $HEADER="-H 'Authorization: token $TOKEN'"
+#if ($TOKEN -ne $null) {
+#    $HEADER="-H 'Authorization: token $TOKEN'"
 #    $HEADER="-H 'Authorization: token xyz'"
-}
-echo "API URL: $API_URL"
-echo "Header: $HEADER"
+#}
+#echo "API URL: $API_URL"
+#echo "Header: $HEADER"
+
 #$RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
-$RELEASE_DATA=$(curl -H "Authorization: token $TOKEN" "$API_URL/releases/$Env:INPUT_VERSION")
+$RELEASE_DATA=$(curl -s -H "Authorization: token $TOKEN" "$API_URL/releases/$Env:INPUT_VERSION")
 echo $RELEASE_DATA
 $MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r "try .message")
 
-echo "Message $MESSAGE"
+#echo "Message $MESSAGE"
 
 $ASSET_ID=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".assets | map(select(.name == """"$Env:INPUT_FILE""""""))[0].id")
 if ($ASSET_ID -eq $null) {
@@ -58,7 +59,9 @@ $TAG_VERSION=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.ex
 $RELEASE_NAME=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".name")
 $RELEASE_BODY=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".body")
 
-curl -k -J -L `
+echo "Tag Version: $TAG_VERSION"
+
+curl -k -J -L -s `
   -H "Accept: application/octet-stream" `
   -H "Authorization: token $TOKEN" `
   "$API_URL/releases/assets/$ASSET_ID" `
