@@ -48,7 +48,7 @@ $MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -
 
 echo "Message $MESSAGE"
 
-$ASSET_ID=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".assets \| map(select(.name == \"${INPUT_FILE}\"))[0].id")
+$ASSET_ID=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".assets '| map(select(.name == '"${INPUT_FILE}'"))[0].id")
 
 echo "ASSET_ID $ASSET_ID"
 
