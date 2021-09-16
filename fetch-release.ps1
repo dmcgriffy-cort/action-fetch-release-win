@@ -44,9 +44,8 @@ $API_URL="https://api.github.com/repos/$REPO"
 
 #$RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
 $RELEASE_DATA=$(curl -s -H "Authorization: token $TOKEN" "$API_URL/releases/$Env:INPUT_VERSION")
-echo $RELEASE_DATA
+#echo $RELEASE_DATA
 $MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r "try .message")
-
 #echo "Message $MESSAGE"
 
 $ASSET_ID=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".assets | map(select(.name == """"$Env:INPUT_FILE""""""))[0].id")
