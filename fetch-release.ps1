@@ -58,11 +58,11 @@ if ($ASSET_ID -eq $null) {
 $RELEASE_NAME=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".name")
 $RELEASE_BODY=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".body")
 
-curl -k -J -L |
-  -H "Accept: application/octet-stream" |
-  -H "Authorization: token $TOKEN" |
-  "$API_URL/releases/assets/$ASSET_ID" |
-  --create-dirs |
+curl -k -J -L `
+  -H "Accept: application/octet-stream" `
+  -H "Authorization: token $TOKEN" `
+  "$API_URL/releases/assets/$ASSET_ID" `
+  --create-dirs `
   -o "${TARGET}"
 
 #echo "::set-output name=version::$TAG_VERSION"
