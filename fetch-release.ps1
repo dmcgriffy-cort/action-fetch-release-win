@@ -49,7 +49,24 @@ $MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -
 echo "Message $MESSAGE"
 
 $ASSET_ID=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".assets | map(select(.name == """"$Env:INPUT_FILE""""""))[0].id")
+if ($ASSET_ID -eq $null) {
+  echo "Could not find asset id"
+  exit 1
+}
 
-echo "ASSET_ID $ASSET_ID"
+#$TAG_VERSION=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".tag_name" | sed -e "s/^v//" | sed -e "s/^v.//")
+$RELEASE_NAME=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".name")
+$RELEASE_BODY=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".body")
+
+curl -k -J -L |
+  -H "Accept: application/octet-stream" |
+  -H "Authorization: token $TOKEN" |
+  "$API_URL/releases/assets/$ASSET_ID" |
+  --create-dirs |
+  -o "${TARGET}"
+
+#echo "::set-output name=version::$TAG_VERSION"
+echo "::set-output name=name::$RELEASE_NAME"
+echo "::set-output name=body::$RELEASE_BODY"
 
 exit 0
