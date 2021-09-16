@@ -54,7 +54,7 @@ if ($ASSET_ID -eq $null) {
   exit 1
 }
 
-#$TAG_VERSION=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".tag_name" | sed -e "s/^v//" | sed -e "s/^v.//")
+$TAG_VERSION=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".tag_name" | %{ $_ -replace "^v", "" } | %{ $_ -replace "^v.", "" }  )
 $RELEASE_NAME=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".name")
 $RELEASE_BODY=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".body")
 
@@ -65,7 +65,7 @@ curl -k -J -L `
   --create-dirs `
   -o "${TARGET}"
 
-#echo "::set-output name=version::$TAG_VERSION"
+echo "::set-output name=version::$TAG_VERSION"
 echo "::set-output name=name::$RELEASE_NAME"
 echo "::set-output name=body::$RELEASE_BODY"
 
