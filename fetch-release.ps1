@@ -36,8 +36,8 @@ echo "Version: $Env:INPUT_VERSION"
 
 $API_URL="https://api.github.com/repos/$REPO"
 if ($TOKEN -ne $null) {
-    $HEADER="-H """"Authorization: token $TOKEN"""""
-#    $HEADER="-H `"Authorization: token xyz`""
+#    $HEADER="-H """"Authorization: token $TOKEN"""""
+    $HEADER="-H """Authorization: token xyz""""
 }
 echo "API URL: $API_URL"
 echo "Header: $HEADER"
@@ -48,7 +48,7 @@ $MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -
 
 echo "Message $MESSAGE"
 
-ASSET_ID=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".assets | map(select(.name == \"${INPUT_FILE}\"))[0].id")
+ASSET_ID=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".assets \| map(select(.name == \"${INPUT_FILE}\"))[0].id")
 
 echo "ASSET_ID $ASSET_ID"
 
