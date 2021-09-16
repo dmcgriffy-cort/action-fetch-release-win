@@ -44,8 +44,12 @@ echo "Header: $HEADER"
 #$RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
 $RELEASE_DATA=$(curl $HEADER "$API_URL/releases")
 echo $RELEASE_DATA
-$MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".message")
+$MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r "try .message")
 
 echo "Message $MESSAGE"
+
+ASSET_ID=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r ".assets | map(select(.name == \"${INPUT_FILE}\"))[0].id")
+
+echo "ASSET_ID "$ASSET_ID"
 
 exit 0
