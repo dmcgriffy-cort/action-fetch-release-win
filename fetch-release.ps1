@@ -43,7 +43,11 @@ $API_URL="https://api.github.com/repos/$REPO"
 #echo "Header: $HEADER"
 
 #$RELEASE_DATA=$(curl $HEADER "$API_URL/releases/$Env:INPUT_VERSION")
-$RELEASE_DATA=$(curl -s -H "Authorization: token $TOKEN" "$API_URL/releases/$Env:INPUT_VERSION")
+if ($$env:INPUT_VERSION -eq "latest") {
+  $RELEASE_DATA=$(curl -s -H "Authorization: token $TOKEN" "$API_URL/releases/latest")
+} else {
+  $RELEASE_DATA=$(curl -s -H "Authorization: token $TOKEN" "$API_URL/releases/tags/$Env:INPUT_VERSION")
+}
 echo $RELEASE_DATA
 $MESSAGE=$(echo "$RELEASE_DATA" | & "$Env:GITHUB_ACTION_PATH\bin\jq-win64.exe" -r "try .message")
 #echo "Message $MESSAGE"
